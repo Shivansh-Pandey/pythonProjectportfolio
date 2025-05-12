@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Portfolio Gallery</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <h1>My Portfolio</h1>
+    <div id="filters">
+        {% for cat in categories %}
+            <button onclick="filterCategory('{{ cat }}')">{{ cat }}</button>
+        {% endfor %}
+    </div>
+    <div id="gallery">
+        {% for item in data["All"] %}
+            <div class="item" data-category="{{ item.category }}">
+                {% if item.type == 'image' %}
+                    <img src="{{ item.link }}" alt="{{ item.name }}">
+                {% elif item.type == 'video' %}
+                    <video controls src="{{ item.link }}"></video>
+                {% elif item.type == 'pdf' %}
+                    <embed src="{{ item.link }}" type="application/pdf" width="100%" height="200px"/>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
